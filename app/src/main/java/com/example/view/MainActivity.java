@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -49,7 +52,58 @@ public class MainActivity extends BaseBindingActivity<ActivityMain2Binding> impl
         getBinding().setVariable(BR.cardViewModel, cardViewModel);
         roomDB = RoomDB.getInstance(MainActivity.this);
         connectionObserver();
+        Log.e("MainonCreate","MainonCreate");
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("MainonCreate","onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("MainonCreate","onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("MainonCreate","onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("MainonCreate","onStop");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("MainonCreate","onDestroy");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("MainonCreate","onRestart");
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        Log.e("MainonCreate","onSaveInstanceState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.e("MainonCreate","onRestoreInstanceState");
+    }
+
     private void connectionObserver() {
         if (NetworkConnectivity.isOnline(this)) {
             connectionValidation(true);
@@ -162,6 +216,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMain2Binding> impl
     @Override
     public void setAccept( String Acceptname) {
         showToast(Acceptname+" Request is Accepted");
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        this.startActivity(intent);
+
 
     }
 
@@ -170,4 +227,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMain2Binding> impl
         showToast(declineName+" Request is Declined");
 
     }
+
+   /* public void configureThumbnailScrubber(BaseVideoView brightcoveVideoView) {
+        Log.v(TAG, "Thumbnail Scrubbing is enabled, setting up the PreviewThumbnailController");
+        ThumbnailComponent thumbnailComponent = new ThumbnailComponent(brightcoveVideoView);
+        thumbnailComponent.setupPreviewThumbnailController();
+    }*/
 }
